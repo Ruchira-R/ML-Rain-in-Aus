@@ -2,8 +2,11 @@ import pandas as pd
 from pandas import DataFrame
 import numpy as np
 
-def normalizer( df,colName, numberOfRows ):
-    df[colName] = ( df[colName] - df[colName].min() ) / ( df[colName].max() - df[colName].min() )
+
+def normalizer( df, numberOfRows ,colName,mean, sd ):
+    for i in range(numberOfRows):
+        print(i)
+        df[colName][i] = ( df[colName][i] - mean ) / (sd)
     return df
 
 columnsCat = ["Date","Location"	,"WindGustDir","RainToday","RainTomorrow","WindDir9am","WindDir3pm" ]
@@ -15,8 +18,14 @@ df = pd.read_csv('./dataset/cleaned.csv')
 
 for i in range(len(columnsNum)):
     print("normalising " + str(columnsNum[i] ))
-    df = normalizer(df , columnsNum[i], len(df[columnsNum[i]]) )
+    df = normalizer(df , len(df[columnsNum[i]]), columnsNum[i], df[columnsNum[i] ].mean() , df[columnsNum[i]].std())
 
 print(df)
 df.to_csv("./dataset/normalised.csv")
+
+
+
+
+
+
 

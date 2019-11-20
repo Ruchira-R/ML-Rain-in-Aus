@@ -1,6 +1,7 @@
 import pandas as pd
 from pandas import DataFrame
 import numpy as np
+import os.path
 
 def cleanCat( df,colName,numberOfRows ):
     for i in range( numberOfRows ):
